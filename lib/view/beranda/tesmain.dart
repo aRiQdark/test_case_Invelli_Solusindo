@@ -185,21 +185,21 @@ class _berandaState extends State<beranda> {
                     SizedBox(
                       height: 20,
                     ),
-                    InkWell(
-                      onTap: () => _selectDate,
-                      child: Container(
-                        margin: EdgeInsets.only(right: 10),
-                        height: 42,
-                        width: 84,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white)),
-                        child: Center(
-                            child: Text(
-                          "Tanggal Deadline",
-                          style: TextStyle(color: Colors.white),
-                        )),
-                      ),
-                    ),
+                    // // InkWell(
+                    // //   onTap: () => _selectDate,
+                    // //   child: Container(
+                    // //     margin: EdgeInsets.only(right: 10),
+                    // //     height: 42,
+                    // //     width: 84,
+                    // //     decoration: BoxDecoration(
+                    // //         border: Border.all(color: Colors.white)),
+                    // //     child: Center(
+                    // //         child: Text(
+                    // //       "Tanggal Deadline",
+                    // //       style: TextStyle(color: Colors.white),
+                    // //     )),
+                    // //   ),
+                    // ),
                     SizedBox(
                       height: 20,
                     ),
