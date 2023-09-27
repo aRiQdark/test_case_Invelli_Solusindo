@@ -7,7 +7,7 @@ import 'package:tes_api/controller/authcontroller.dart';
 class Registrasi extends GetView<authcontroller> {
   Registrasi({super.key});
   // final display = Get.find<Profilecustomer>();
-final alamat = TextEditingController();
+  final alamat = TextEditingController();
   final emailC = TextEditingController();
   final passwordC = TextEditingController();
   final nohp = TextEditingController();
@@ -15,85 +15,100 @@ final alamat = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      
+      backgroundColor: Color.fromARGB(255, 21, 22, 31),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Center(
             child: Column(
               children: [
-                SizedBox(height: 100,),
-              Text('Lets Get Started',style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
-              Text('signup and we will continue',style: TextStyle(color: Colors.grey[500],fontWeight: FontWeight.w300),),
-             
+                SizedBox(
+                  height: 100,
+                ),
+                Text(
+                  'Lets Get Started',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  'signup and we will continue',
+                  style: TextStyle(
+                      color: Colors.grey[500], fontWeight: FontWeight.w300),
+                ),
+
                 SizedBox(
                   height: 100,
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  height: 70,
-                  width: 227,
+                  height: 60,
+                  width: 292,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(18),
-                  ),
+                      borderRadius: BorderRadius.circular(16),
+                      color: Color(0xff262A34)),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
+                    padding: const EdgeInsets.all(12.0),
+                    child: TextFormField(
                       controller: emailC,
-                      decoration: const InputDecoration(
-                        hintText: 'Email',
-                      ),
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Email',
+                          hintStyle: TextStyle(color: Colors.white)),
                     ),
                   ),
                 ),
-               
-                  
-               
+
                 Padding(
-                  padding: const EdgeInsets.only(left: 20,right: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    height: 70,
-                    width: 227,
+                    margin: EdgeInsets.only(top: 15),
+                    height: 60,
+                    width: 292,
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(18),
-                    ),
+                        borderRadius: BorderRadius.circular(16),
+                        color: Color(0xff262A34)),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
+                      padding: const EdgeInsets.all(12.0),
+                      child: TextFormField(
                         controller: passwordC,
-                        decoration: const InputDecoration(
-                          hintText: 'Password',
-                        ),
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                           
+                            border: InputBorder.none,
+                            hintText: 'Password',
+                            hintStyle: TextStyle(color: Colors.white)),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 10,),
-    //             Container(
-    //   padding: EdgeInsets.symmetric(horizontal: 16.0),
-    //   child: Obx(
-    //     () => DropdownButton(
-    //       isExpanded: true,
-    //       hint: Text('Pilih opsi'),
-    //       value: controller.selectedOption.value,
-    //       onChanged: (newValue) {
-    //         controller.selectedOption.value = newValue!;
-    //       },
-    //       items: controller.options.map((option) {
-    //         return DropdownMenuItem(
-    //           child: Text(option),
-    //           value: option,
-    //         );
-    //       }).toList(),
-    //     ),
-    //   ),
-    // ),
+                SizedBox(
+                  height: 10,
+                ),
+                //             Container(
+                //   padding: EdgeInsets.symmetric(horizontal: 16.0),
+                //   child: Obx(
+                //     () => DropdownButton(
+                //       isExpanded: true,
+                //       hint: Text('Pilih opsi'),
+                //       value: controller.selectedOption.value,
+                //       onChanged: (newValue) {
+                //         controller.selectedOption.value = newValue!;
+                //       },
+                //       items: controller.options.map((option) {
+                //         return DropdownMenuItem(
+                //           child: Text(option),
+                //           value: option,
+                //         );
+                //       }).toList(),
+                //     ),
+                //   ),
+                // ),
                 ElevatedButton(
-                    onPressed: () => controller.signup(emailC.text, passwordC.text),
+                    onPressed: () =>
+                        controller.signup(emailC.text, passwordC.text),
                     child: const Text('Daftar'))
               ],
             ),

@@ -7,7 +7,7 @@ import 'package:tes_api/view/beranda/tesmain.dart';
 
 import 'routename.dart';
 
-class movieroute {
+class TodoRoute {
   static const Home = routename.Home;
   static const Onboarding = '/Onboarding';
   static const login = '/log-in';

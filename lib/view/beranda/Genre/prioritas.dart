@@ -11,21 +11,17 @@ import 'package:lottie/lottie.dart';
 
 import 'package:tes_api/controller/authcontroller.dart';
 
+
 import 'package:tes_api/model/modelnote.dart';
-import 'package:tes_api/view/beranda/Genre/prioritas.dart';
 import 'package:tes_api/view/beranda/Genre/tgldeadline.dart';
 import 'package:tes_api/view/beranda/add_data.dart';
 import 'package:tes_api/view/beranda/detail_data.dart';
 import 'package:tes_api/view/beranda/done.dart';
 import 'package:tes_api/view/beranda/editdata.dart';
+import 'package:tes_api/view/beranda/tesmain.dart';
 import 'package:tes_api/view/loading/loadingasset.dart';
 
-class beranda extends StatefulWidget {
-  @override
-  State<beranda> createState() => _berandaState();
-}
-
-class _berandaState extends State<beranda> {
+class prioritas extends GetView {
   @override
   Widget build(BuildContext context) {
     final auth = Get.find<authcontroller>();
@@ -46,6 +42,7 @@ class _berandaState extends State<beranda> {
         ))!;
 
         if (pickedTime != null) {
+          // Combine the picked date and time into a single DateTime.
           final DateTime combinedDateTime = DateTime(
             pickedDate.year,
             pickedDate.month,
@@ -54,12 +51,15 @@ class _berandaState extends State<beranda> {
             pickedTime.minute,
           );
 
+          // Update the selectedDateTime variable.
           selectedDateTime = combinedDateTime;
 
+          // Now, you can use selectedDateTime for filtering or any other purpose.
           auth.filterbydate(selectedDateTime!);
-        } else {}
+        }
       }
     }
+
 
     Get.put(authcontroller());
 
@@ -70,7 +70,7 @@ class _berandaState extends State<beranda> {
         child: SizedBox(
           height: 1000,
           child: StreamBuilder<QuerySnapshot>(
-            stream: auth.getUserDocument(),
+            stream: auth.orderbyprioritas(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
@@ -132,6 +132,7 @@ class _berandaState extends State<beranda> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                       
                         InkWell(
                           onTap: () => Get.to(beranda()),
                           child: Container(
@@ -148,21 +149,18 @@ class _berandaState extends State<beranda> {
                             )),
                           ),
                         ),
-                        InkWell(
-                          onTap: () => Get.to(prioritas()),
-                          child: Container(
-                            margin: EdgeInsets.only(right: 10),
-                            height: 42,
-                            width: 80,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.white)),
-                            child: Center(
-                                child: Text(
-                              "Prioritas",
-                              style: TextStyle(color: Colors.white),
-                            )),
-                          ),
+                        Container(
+                          margin: EdgeInsets.only(right: 10),
+                          height: 42,
+                          width: 80,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.white)),
+                          child: Center(
+                              child: Text(
+                            "Prioritas",
+                            style: TextStyle(color: Colors.white),
+                          )),
                         ),
                         InkWell(
                           onTap: () => Get.to(deadline()),
@@ -195,7 +193,7 @@ class _berandaState extends State<beranda> {
                             border: Border.all(color: Colors.white)),
                         child: Center(
                             child: Text(
-                          "Tanggal Deadline",
+                          "Tgl Deadline",
                           style: TextStyle(color: Colors.white),
                         )),
                       ),
@@ -203,11 +201,12 @@ class _berandaState extends State<beranda> {
                     SizedBox(
                       height: 20,
                     ),
+                   
                     Text(
-                      "- Title",
+                      "- Prioritas",
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
-                    SizedBox(
+                     SizedBox(
                       height: 20,
                     ),
                     Text(
@@ -218,12 +217,10 @@ class _berandaState extends State<beranda> {
                       height: 20,
                     ),
                     SizedBox(
-                      height: Get.height,
+                      height: 1000,
                       child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
                         itemCount: documents.length,
                         itemBuilder: (context, index) {
-                          var isloading = true.obs;
                           DocumentSnapshot document = documents[index];
                           Map<String, dynamic> data =
                               document.data() as Map<String, dynamic>;
@@ -240,108 +237,63 @@ class _berandaState extends State<beranda> {
 
                             String title = data['title'];
 
-                            return Obx(() => InkWell(
-                                onTap: () => Get.toNamed('/detail-data',
-                                    arguments: document),
-                                child: documents.isNotEmpty
-                                    ? isloading.value
-                                        ? Container(
-                                            margin: EdgeInsets.only(bottom: 20),
-                                            height: 65,
-                                            width: 308,
-                                            decoration: BoxDecoration(
-                                                color: Color.fromARGB(
-                                                    255, 255, 255, 255),
-                                                borderRadius:
-                                                    BorderRadius.circular(20)),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(12.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Checkbox(
-                                                        value: auth
-                                                            .Ischecked.value,
-                                                        onChanged: (value) {
-                                                          auth.toggleCheckbox(
-                                                              id);
-                                                          auth.isdone(
-                                                              id, value!);
-                                                        },
-                                                      ),
-                                                      SizedBox(
-                                                        width: 2,
-                                                      ),
-                                                      Text("${title}")
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      IconButton(
-                                                          onPressed: () =>
-                                                              Get.to(
-                                                                  editdata(),arguments: document),
-                                                          icon:
-                                                              Icon(Icons.edit)),
-                                                      IconButton(
-                                                          onPressed: () {
-                                                            Get.defaultDialog(
-                                                                middleText:
-                                                                    'Yakin ingin hapus',
-                                                                cancel: ElevatedButton(
-                                                                    onPressed:
-                                                                        () => Get
-                                                                            .back(),
-                                                                    child: Text(
-                                                                        "Kembali")),
-                                                                confirm:
-                                                                    ElevatedButton(
-                                                                        onPressed:
-                                                                            () {
-                                                                          auth.deleteNote(
-                                                                              id);
-                                                                          Get.back();
-                                                                        },
-                                                                        child: Text(
-                                                                            "Ya, hapus")));
-                                                          },
-                                                          icon: Icon(
-                                                              LineIcons.trash)),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            ))
-                                        : Text(
-                                            "data",
-                                            style:
-                                                TextStyle(color: Colors.amber),
-                                          )
-                                    : Center(
-                                        child: Text(
-                                        "data",
-                                        style: TextStyle(color: Colors.amber),
-                                      ))));
-                          } else {
-                            return Center(
+                            return InkWell(
+                              onTap: () => Get.toNamed('/detail-data',
+                                  arguments: document),
                               child: Container(
-                                  margin: EdgeInsets.only(bottom: 20),
-                                  height: 65,
-                                  width: 308,
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: Lottie.asset(
-                                      "assets/lottie/animation_ln07v442.json",
-                                      fit: BoxFit
-                                          .cover) // Ganti 'your_image_asset.png' dengan path gambar Anda
+                                margin: EdgeInsets.only(bottom: 20),
+                                height: 65,
+                                width: 308,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Obx(() => Checkbox(
+                                                value: auth.Ischecked.value,
+                                                onChanged: (value) {
+                                                  auth.toggleCheckbox(id);
+                                                  auth.isdone(id, value!);
+                                                },
+                                              )),
+                                          SizedBox(
+                                            width: 2,
+                                          ),
+                                          Text("${title}")
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          IconButton(
+                                              onPressed: () => Get.to(editdata()),
+                                              icon: Icon(Icons.edit)),
+                                          IconButton(
+                                              onPressed: () {
+                                               Get.defaultDialog(
+                                                middleText: 'Yakin ingin hapus',
+                                                cancel: ElevatedButton(onPressed: () => Get.back(), child:Text("Kembali")),
+                                                confirm: ElevatedButton(onPressed: () {
+                                                  auth.deleteNote(id);
+                                                  Get.back();
+                                                }, child: Text("Ya, hapus"))
+                                               );
+                                              },
+                                              icon: Icon(LineIcons.trash)),
+                                        ],
+                                      )
+                                    ],
                                   ),
+                                ),
+                              ),
                             );
+                          } else {
+                            return Container();
                           }
                         },
                       ),

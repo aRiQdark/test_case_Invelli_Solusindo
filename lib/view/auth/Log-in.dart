@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:tes_api/controller/authcontroller.dart';
+import 'package:tes_api/primary_textfield.dart';
 import 'package:tes_api/view/auth/sign-in.dart';
 import 'package:tes_api/view/beranda/tesmain.dart';
 
@@ -21,7 +22,7 @@ class Login extends GetView<authcontroller> {
             child: ListView(
               children: [
                 Text(
-                  "Welcome Back",
+                  "HI",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -34,7 +35,9 @@ class Login extends GetView<authcontroller> {
                   "Please sign in to your account!",
                   style: TextStyle(fontSize: 14, color: Colors.white),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   "Test TO DO List!",
                   style: TextStyle(fontSize: 14, color: Colors.white),
@@ -68,21 +71,34 @@ class Login extends GetView<authcontroller> {
                       borderRadius: BorderRadius.circular(16),
                       color: Color(0xff262A34)),
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: TextFormField(
-                      controller: passwordC,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.remove_red_eye_outlined,
-                            color: Color(0xff545F71),
-                          ),
-                          border: InputBorder.none,
+                    padding: const EdgeInsets.all(5.0),
+                    child: Obx(
+                        () => PrimaryTextfield(
+                        
                           hintText: 'Password',
-                          hintStyle: TextStyle(color: Colors.white)),
-                    ),
+                          
+                          controller: passwordC,
+                          obscureText:
+                              controller.passwordIsHidden.value == true,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            return null;
+                          },
+                          prefixIcon: Icon(Icons.lock,color: Colors.white,),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              controller.passwordIsHidden.toggle();
+                            },
+                            icon: controller.passwordIsHidden.value == true
+                                ? const Icon(Icons.visibility_outlined,color: Colors.white,)
+                                : const Icon(Icons.visibility_off_outlined,color: Colors.white,),
+                          ),
+                        ),
+                      )),
                   ),
-                ),
+                
                 SizedBox(
                   height: 10,
                 ),
@@ -111,25 +127,6 @@ class Login extends GetView<authcontroller> {
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 15),
-                  height: 60,
-                  width: 239,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.white),
-                  child: Center(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset("assets/icons/Google.png"),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("Sign In with Google")
-                    ],
-                  )),
                 ),
                 SizedBox(
                   height: 38,

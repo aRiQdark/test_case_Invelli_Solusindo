@@ -19,6 +19,7 @@ class _adddataState extends State<adddata> {
   TextEditingController title = TextEditingController();
  void selectDateTime(BuildContext context) {
   DatePicker.showDateTimePicker(
+    
     context,
     showTitleActions: true,
     minTime: DateTime(2000),
@@ -98,21 +99,26 @@ class _adddataState extends State<adddata> {
                         )
                       ],
                     ),
-                    Container(
-                      height: 80,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: Color(0xffD9D9D9),
-                      ),
-                      child: TextFormField(
-                        controller: dateController,
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          labelText: 'Pilih Tanggal',
-                          suffixIcon: GestureDetector(
-                            onTap: () => selectDateTime(context),
-                            child: Icon(Icons.calendar_today),
+                    InkWell(
+                      onTap: () => selectDateTime(context),
+                      child: Container(
+                        height: 80,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: Color.fromARGB(255, 21, 22, 31),
+                        ),
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          controller: dateController,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            labelText: 'Pilih Tanggal',
+                            labelStyle: TextStyle(color: Colors.white),
+                            suffixIcon: GestureDetector(
+                              onTap: () => selectDateTime(context),
+                              child: Icon(Icons.calendar_today,color: Colors.white,),
+                            ),
                           ),
                         ),
                       ),

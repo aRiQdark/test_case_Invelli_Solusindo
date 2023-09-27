@@ -33,9 +33,9 @@ class MyApp extends StatelessWidget {
             title: 'apps',
             debugShowCheckedModeBanner: false,
             initialRoute: snapshot.data != null && snapshot.data!.emailVerified
-                ? movieroute.Home
-                : movieroute.login,
-            getPages: movieroute.page,
+                ? TodoRoute.Home
+                : TodoRoute.login,
+            getPages: TodoRoute.page,
           );
         }
        return LoadingPage();

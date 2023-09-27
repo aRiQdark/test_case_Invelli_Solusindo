@@ -12,9 +12,12 @@ import 'package:uuid/uuid.dart';
 import '../model/modelnote.dart';
 
 class authcontroller extends GetxController {
+   RxBool passwordIsHidden = true.obs;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
    var Ischecked = false.obs;
+   
+   
    @override
   void onInit() {
     super.onInit();
@@ -51,7 +54,7 @@ class authcontroller extends GetxController {
 
   RxBool isLoading = false.obs;
   final _storage = GetStorage();
-//login
+
   void login(String email, String password) async {
     try {
       isLoading.value = true;
@@ -75,7 +78,7 @@ class authcontroller extends GetxController {
       }
 
       if (user!.emailVerified == true) {
-        Get.offAllNamed(movieroute.Home);
+        Get.offAllNamed(TodoRoute.Home);
       } else {
         Get.defaultDialog(
           title: "Terjadi kesalahan",
@@ -203,7 +206,25 @@ class authcontroller extends GetxController {
         .collection('auth')
         .doc(uid)
         .collection('notes')
+        .orderBy('title')
+        .snapshots();
+  }
+    Stream<QuerySnapshot<Map<String, dynamic>>> orderbyprioritas() {
+    String uid = auth.currentUser!.uid;
+    return FirebaseFirestore.instance
+        .collection('auth')
+        .doc(uid)
+        .collection('notes')
         .orderBy('prioritas')
+        .snapshots();
+  }
+    Stream<QuerySnapshot<Map<String, dynamic>>> orderbydate() {
+    String uid = auth.currentUser!.uid;
+    return FirebaseFirestore.instance
+        .collection('auth')
+        .doc(uid)
+        .collection('notes')
+        .orderBy('date')
         .snapshots();
   }
 
@@ -255,38 +276,30 @@ class authcontroller extends GetxController {
     await FirebaseAuth.instance.signOut();
     Get.toNamed('/log-in');
   }
-  Future<bool> edit(
-      String title, String date, String status, String prioritas) async {
-    try {
-      Get.defaultDialog(
-          title: 'Task',
-          middleText: 'Yakin ingin lanjutkan',
-          confirm: ElevatedButton(
-              onPressed: () {
-                var uuid = Uuid().v4();
-                firestore
-                    .collection('auth')
-                    .doc(auth.currentUser!.uid)
-                    .collection('notes')
-                    .doc(uuid)
-                    .update({
-                  'id': uuid,
-                  'title': title,
-                  'date': date,
-                  'status': status,
-                  'prioritas': prioritas,
-                  'isDon': false,
-                });
-                Get.to(beranda());
-              },
-              child: Text("Ya,lanjutkan")),
-          cancel: ElevatedButton(
-              onPressed: () => Get.back(), child: Text("Kembali")));
+ Future<bool> edit(
+  String title, String date, String status, String prioritas, String uid) async {
+  try {
+     await firestore
+        .collection('auth')
+        .doc(auth.currentUser!.uid)
+        .collection('notes')
+        .doc(uid)
+        .update({
+          'title': title,
+          'date': date,
+          'status': status,
+          'prioritas': prioritas,
+          'isDon': false,
+        });
 
-      return true;
-    } catch (e) {
-      print(e);
-      return true;
-    }
+    // Navigasi kembali ke halaman beranda setelah berhasil mengupdate
+    Get.to(beranda());
+
+    return true;
+  } catch (e) {
+    print(e);
+    return false;
   }
+}
+
 }
