@@ -186,7 +186,7 @@ class authcontroller extends GetxController {
         .collection('notes')
         .where('date',
             isEqualTo:
-                selectedDate) // Ubah ini sesuai dengan field tanggal yang digunakan di Firestore
+                selectedDate)
         .snapshots();
   }
 
@@ -276,23 +276,15 @@ class authcontroller extends GetxController {
     await FirebaseAuth.instance.signOut();
     Get.toNamed('/log-in');
   }
- Future<bool> edit(
-  String title, String date, String status, String prioritas, String uid) async {
+ Future<bool> edit(Map<String, dynamic> updatedData, String uid) async {
   try {
-     await firestore
+    await firestore
         .collection('auth')
         .doc(auth.currentUser!.uid)
         .collection('notes')
         .doc(uid)
-        .update({
-          'title': title,
-          'date': date,
-          'status': status,
-          'prioritas': prioritas,
-          'isDon': false,
-        });
+        .update(updatedData); 
 
-    // Navigasi kembali ke halaman beranda setelah berhasil mengupdate
     Get.to(beranda());
 
     return true;

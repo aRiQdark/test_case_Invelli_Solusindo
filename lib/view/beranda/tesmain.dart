@@ -231,11 +231,12 @@ class _berandaState extends State<beranda> {
                               data.containsKey('prioritas') &&
                               data.containsKey('status') &&
                               data.containsKey('date') &&
-                              data.containsKey('title')) {
-                            String id = data['id'];
-                            String prioritas = data['prioritas'];
-
-                            String status = data['status'];
+                              data.containsKey('title') &&
+                              data.containsKey('isDon')) {
+                            String id = data['id'].toString();
+                            String prioritas = data['prioritas'].toString();
+                            bool isdon = data['isDon'];
+                            String status = data['status'].toString();
                             // DateTime date = data['date'];
 
                             String title = data['title'];
@@ -265,13 +266,14 @@ class _berandaState extends State<beranda> {
                                                   Row(
                                                     children: [
                                                       Checkbox(
-                                                        value: auth
-                                                            .Ischecked.value,
+                                                        value: isdon,
                                                         onChanged: (value) {
-                                                          auth.toggleCheckbox(
-                                                              id);
-                                                          auth.isdone(
-                                                              id, value!);
+                                                          setState(() {
+                                                            auth.Ischecked
+                                                                .value = value!;
+                                                            auth.isdone(
+                                                                id, value);
+                                                          });
                                                         },
                                                       ),
                                                       SizedBox(
@@ -284,8 +286,9 @@ class _berandaState extends State<beranda> {
                                                     children: [
                                                       IconButton(
                                                           onPressed: () =>
-                                                              Get.to(
-                                                                  editdata(),arguments: document),
+                                                              Get.to(editdata(),
+                                                                  arguments:
+                                                                      document),
                                                           icon:
                                                               Icon(Icons.edit)),
                                                       IconButton(

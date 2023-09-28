@@ -16,26 +16,11 @@ class editdata extends StatefulWidget {
 class _editdataState extends State<editdata> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController dateController = TextEditingController();
-    void selectDateTime(BuildContext context) {
-      DatePicker.showDateTimePicker(
-        context,
-        showTitleActions: true,
-        minTime: DateTime(2000),
-        maxTime: DateTime(2101),
-        onConfirm: (DateTime picked) {
-          setState(() {
-            dateController.text = picked.toString();
-          });
-        },
-        currentTime: DateTime.now(),
-      );
-    }
-
     var selectedOption = ''.obs;
     var selectedOption1 = ''.obs;
     List<String> items = ['Sudah Selesai', 'Belum Selesai'];
     List<String> item = ['Sangat penting', 'Penting', 'Biasa saja'];
+    
     final auth = Get.find<authcontroller>();
     final index = Get.arguments;
     final controller = Get.find<authcontroller>();
@@ -65,6 +50,23 @@ class _editdataState extends State<editdata> {
                 String date = data['date'];
 
                 String title = data['title'];
+                TextEditingController dateController =
+                    TextEditingController(text: date);
+                void selectDateTime(BuildContext context) {
+                  DatePicker.showDateTimePicker(
+                    context,
+                    showTitleActions: true,
+                    minTime: DateTime(2000),
+                    maxTime: DateTime(2101),
+                    onConfirm: (DateTime picked) {
+                      setState(() {
+                        dateController.text = picked.toString();
+                      });
+                    },
+                    currentTime: DateTime.now(),
+                  );
+                }
+
                 TextEditingController tes = TextEditingController(text: title);
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -220,15 +222,22 @@ class _editdataState extends State<editdata> {
                         children: [
                           InkWell(
                             onTap: () {
-                              controller.edit(
-                                  tes.text,
-                                  dateController.text,
-                                  selectedOption.value,
-                                  selectedOption1.value,
-                                  id);
-                              print("resssssssssss $id");
-                              print(controller.edit(
-                                  title, date, status, prioritas, id));
+                              Map<String, dynamic> updatedData = {
+                                "title": title.isNotEmpty
+                                    ? tes.text
+                                    : title,
+                                "prioritas": prioritas.isNotEmpty
+                                    ? selectedOption1.value
+                                    : prioritas,
+                                "status": status.isNotEmpty
+                                    ? selectedOption.value
+                                    : status,
+                                "date": date.isNotEmpty
+                                    ? dateController.text
+                                    : date
+                              };
+print("tesssssssssss $updatedData");
+                              controller.edit(updatedData, id);
                             },
                             child: Container(
                               height: 50,

@@ -259,7 +259,7 @@ class prioritas extends GetView {
                                                 value: auth.Ischecked.value,
                                                 onChanged: (value) {
                                                   auth.toggleCheckbox(id);
-                                                  auth.isdone(id, value!);
+                                                  auth.isdone(id.toString(), value!);
                                                 },
                                               )),
                                           SizedBox(
@@ -279,7 +279,7 @@ class prioritas extends GetView {
                                                 middleText: 'Yakin ingin hapus',
                                                 cancel: ElevatedButton(onPressed: () => Get.back(), child:Text("Kembali")),
                                                 confirm: ElevatedButton(onPressed: () {
-                                                  auth.deleteNote(id);
+                                                  auth.deleteNote(id.toString());
                                                   Get.back();
                                                 }, child: Text("Ya, hapus"))
                                                );
