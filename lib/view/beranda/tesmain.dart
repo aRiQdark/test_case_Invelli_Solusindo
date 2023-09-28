@@ -269,8 +269,7 @@ class _berandaState extends State<beranda> {
                                                         value: isdon,
                                                         onChanged: (value) {
                                                           setState(() {
-                                                            auth.Ischecked
-                                                                .value = value!;
+                                                            isdon = value!;
                                                             auth.isdone(
                                                                 id, value);
                                                           });

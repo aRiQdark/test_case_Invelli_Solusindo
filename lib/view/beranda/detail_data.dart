@@ -30,10 +30,11 @@ class daetaildata extends GetView<authcontroller> {
                   data.containsKey('prioritas') &&
                   data.containsKey('status') &&
                   data.containsKey('date') &&
-                  data.containsKey('title')) {
+                  data.containsKey('title') &&
+                              data.containsKey('isDon')) {
                 String id = data['id'];
                 String prioritas = data['prioritas'];
-
+ bool isdon = data['isDon'];
                 String status = data['status'];
                 String date = data['date'];
 
@@ -125,10 +126,10 @@ class daetaildata extends GetView<authcontroller> {
                               Row(
                                 children: [
                                   Icon(
-                                    auth.Ischecked.value
+                                   isdon
                                         ? Icons.check_circle
                                         : Icons.circle_outlined,
-                                    color: auth.Ischecked.value
+                                    color: isdon
                                         ? Colors.green
                                         : Colors.grey,
                                   ),
@@ -136,11 +137,11 @@ class daetaildata extends GetView<authcontroller> {
                                     width: 4,
                                   ),
                                   Text(
-                                    auth.Ischecked.value
+                                    isdon
                                         ? 'Sudah Selesai'
                                         : 'Belum Selesai',
                                     style: TextStyle(
-                                      color: auth.Ischecked.value
+                                      color: isdon
                                           ? Colors.green
                                           : Colors.red,
                                     ),
