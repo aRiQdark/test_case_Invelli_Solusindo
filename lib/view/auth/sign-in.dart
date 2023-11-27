@@ -15,7 +15,7 @@ class Registrasi extends GetView<authcontroller> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 21, 22, 31),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -28,7 +28,7 @@ class Registrasi extends GetView<authcontroller> {
                 Text(
                   'Lets Get Started',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 25,
                     fontWeight: FontWeight.w500,
                   ),
@@ -47,12 +47,12 @@ class Registrasi extends GetView<authcontroller> {
                   width: 292,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      color: Color(0xff262A34)),
+                      color: Colors.grey),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: TextFormField(
                       controller: emailC,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Email',
@@ -69,12 +69,12 @@ class Registrasi extends GetView<authcontroller> {
                     width: 292,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: Color(0xff262A34)),
+                        color: Colors.grey),
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: TextFormField(
                         controller: passwordC,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                            
                             border: InputBorder.none,

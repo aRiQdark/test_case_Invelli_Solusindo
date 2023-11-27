@@ -31,7 +31,7 @@ class authcontroller extends GetxController {
   void onClose() {
     super.onClose();
   }
-
+  
   @override
   void onReady() {
     super.onReady();
@@ -276,22 +276,23 @@ class authcontroller extends GetxController {
     await FirebaseAuth.instance.signOut();
     Get.toNamed('/log-in');
   }
+
+
  Future<bool> edit(Map<String, dynamic> updatedData, String uid) async {
   try {
     await firestore
-        .collection('auth')
-        .doc(auth.currentUser!.uid)
-        .collection('notes')
-        .doc(uid)
-        .update(updatedData); 
-
-    Get.to(beranda());
-
-    return true;
+          .collection('auth')
+          .doc(auth.currentUser!.uid)
+          .collection('notes')
+          .doc(uid)
+          .update(updatedData); 
+          Get.to(beranda());
+        return true;
   } catch (e) {
     print(e);
     return false;
   }
 }
+
 
 }

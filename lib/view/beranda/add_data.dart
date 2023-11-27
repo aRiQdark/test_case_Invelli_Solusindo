@@ -40,7 +40,7 @@ class _adddataState extends State<adddata> {
     List<String> items = ['Sudah Selesai','Belum Selesai'];
      List<String> item = ['Sangat penting', 'Penting','Biasa saja'];
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 21, 22, 31),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
@@ -50,22 +50,22 @@ class _adddataState extends State<adddata> {
               width: 300,
               decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                   borderRadius: BorderRadius.circular(20)),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
                   controller: title,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                      labelStyle: TextStyle(color: Colors.white),
-                      focusColor: Colors.white,
-                      fillColor: Colors.white,
+                      labelStyle: TextStyle(color: Colors.black),
+                      focusColor: Colors.black,
+                      fillColor: Colors.black,
                       border: InputBorder.none,
                       hintText: 'Susun Kegiatan kamu?...',
 
-                      hintStyle: TextStyle(color: Colors.white)),
+                      hintStyle: TextStyle(color: Colors.black)),
                 ),
               ),
             ),
@@ -76,7 +76,7 @@ class _adddataState extends State<adddata> {
               height: 80,
               width: 300,
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white),
+                  border: Border.all(color: Colors.black),
                   borderRadius: BorderRadius.circular(10)),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -87,7 +87,7 @@ class _adddataState extends State<adddata> {
                       children: [
                         Icon(
                           Icons.calendar_month_outlined,
-                          color: Colors.white,
+                          color: Colors.black,
                           size: 40,
                         ),
                         SizedBox(
@@ -95,10 +95,11 @@ class _adddataState extends State<adddata> {
                         ),
                         Text(
                           "Batas Waktu",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                         )
                       ],
                     ),
+
                     InkWell(
                       onTap: () => selectDateTime(context),
                       child: Container(
@@ -106,18 +107,19 @@ class _adddataState extends State<adddata> {
                         width: 150,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
-                          color: Color.fromARGB(255, 21, 22, 31),
+                          color: Colors.white,
                         ),
+                        
                         child: TextFormField(
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                           controller: dateController,
                           readOnly: true,
                           decoration: InputDecoration(
                             labelText: 'Pilih Tanggal',
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: TextStyle(color: Colors.black),
                             suffixIcon: GestureDetector(
                               onTap: () => selectDateTime(context),
-                              child: Icon(Icons.calendar_today,color: Colors.white,),
+                              child: Icon(Icons.calendar_today,color: Colors.black,),
                             ),
                           ),
                         ),
@@ -135,7 +137,7 @@ class _adddataState extends State<adddata> {
               child: Obx(
                 () => DropdownButton(
                   isExpanded: true,
-                  hint: const Text('Pilih Status',style: TextStyle(color: Colors.white),),
+                  hint: const Text('Pilih Status',style: TextStyle(color: Colors.black),),
                   
                   value: items.contains(selectedOption.value)
                       ? selectedOption.value
@@ -161,7 +163,7 @@ class _adddataState extends State<adddata> {
               child: Obx(
                 () => DropdownButton(
                   isExpanded: true,
-                  hint: const Text('Pilih Prioritas',style: TextStyle(color: Colors.white),),
+                  hint: const Text('Pilih Prioritas',style: TextStyle(color: Colors.black),),
                   
                   value: item.contains(selectedOption1.value)
                       ? selectedOption1.value
@@ -213,7 +215,7 @@ class _adddataState extends State<adddata> {
                   child: Center(
                     child: Text(
                       "Batal",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                 )

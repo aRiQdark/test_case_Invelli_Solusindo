@@ -53,6 +53,9 @@ dependencies:
   cloud_firestore: ^4.4.5
   uuid: ^4.1.0
   flutter_datetime_picker: ^1.5.1
+  sliver_app_bar_builder: ^1.1.0
+  sliver_app_bar_title: ^1.0.1+7
+  slideable: ^0.0.2
 
 dev_dependencies:
   flutter_test:

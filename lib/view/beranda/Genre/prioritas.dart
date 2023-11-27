@@ -42,7 +42,7 @@ class prioritas extends GetView {
         ))!;
 
         if (pickedTime != null) {
-          // Combine the picked date and time into a single DateTime.
+       
           final DateTime combinedDateTime = DateTime(
             pickedDate.year,
             pickedDate.month,
@@ -51,10 +51,10 @@ class prioritas extends GetView {
             pickedTime.minute,
           );
 
-          // Update the selectedDateTime variable.
+          
           selectedDateTime = combinedDateTime;
 
-          // Now, you can use selectedDateTime for filtering or any other purpose.
+          
           auth.filterbydate(selectedDateTime!);
         }
       }

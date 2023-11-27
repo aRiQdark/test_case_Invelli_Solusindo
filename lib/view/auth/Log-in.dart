@@ -12,8 +12,10 @@ class Login extends GetView<authcontroller> {
   final passwordC = TextEditingController();
   @override
   Widget build(BuildContext context) {
+
+    var size = 10 * 2;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 21, 22, 31),
+      backgroundColor: Colors.white,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(top: 30, left: 34, right: 34),
@@ -21,36 +23,31 @@ class Login extends GetView<authcontroller> {
             padding: const EdgeInsets.all(16),
             child: ListView(
               children: [
-                Text(
-                  "HI",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                ),
+                
+             
                 SizedBox(
                   height: 5,
                 ),
                 Text(
-                  "Please sign in to your account!",
-                  style: TextStyle(fontSize: 14, color: Colors.white),
+                  "Silakan masuk ke akun Anda!",
+                  style: TextStyle(fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold,),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  "Test TO DO List!",
-                  style: TextStyle(fontSize: 14, color: Colors.white),
+                  "Test Case",
+                  style: TextStyle(fontSize: 14, color: Colors.black),
                 ),
                 SizedBox(
-                  height: 81,
+                  height: 60,
                 ),
                 Container(
                   height: 60,
                   width: 292,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      color: Color(0xff262A34)),
+                      color: Colors.grey),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: TextFormField(
@@ -69,14 +66,12 @@ class Login extends GetView<authcontroller> {
                   width: 292,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      color: Color(0xff262A34)),
+                      color: Colors.grey),
                   child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Obx(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Obx(
                         () => PrimaryTextfield(
-                        
                           hintText: 'Password',
-                          
                           controller: passwordC,
                           obscureText:
                               controller.passwordIsHidden.value == true,
@@ -86,19 +81,27 @@ class Login extends GetView<authcontroller> {
                             }
                             return null;
                           },
-                          prefixIcon: Icon(Icons.lock,color: Colors.white,),
+                          prefixIcon: Icon(
+                            Icons.lock,
+                            color: Colors.white,
+                          ),
                           suffixIcon: IconButton(
                             onPressed: () {
                               controller.passwordIsHidden.toggle();
                             },
                             icon: controller.passwordIsHidden.value == true
-                                ? const Icon(Icons.visibility_outlined,color: Colors.white,)
-                                : const Icon(Icons.visibility_off_outlined,color: Colors.white,),
+                                ? const Icon(
+                                    Icons.visibility_outlined,
+                                    color: Colors.white,
+                                  )
+                                : const Icon(
+                                    Icons.visibility_off_outlined,
+                                    color: Colors.white,
+                                  ),
                           ),
                         ),
                       )),
-                  ),
-                
+                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -110,7 +113,7 @@ class Login extends GetView<authcontroller> {
                   ),
                 ),
                 SizedBox(
-                  height: 108,
+                  height: 80,
                 ),
                 InkWell(
                   onTap: () => controller.login(emailC.text, passwordC.text),
@@ -119,7 +122,7 @@ class Login extends GetView<authcontroller> {
                     width: 239,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: Color(0xff5468FF)),
+                        color: Colors.blue),
                     child: Center(
                       child: Text(
                         "Sign In",
@@ -129,27 +132,17 @@ class Login extends GetView<authcontroller> {
                   ),
                 ),
                 SizedBox(
-                  height: 38,
+                  height: size.toDouble(),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have Account?",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    InkWell(
+                InkWell(
                       onTap: () => Get.to(Registrasi()),
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(color: Colors.blue),
+                      child: Center(
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
-                    )
-                  ],
-                )
+                    ),
               ],
             ),
           ),

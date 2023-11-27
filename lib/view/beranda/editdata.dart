@@ -25,11 +25,12 @@ class _editdataState extends State<editdata> {
     final index = Get.arguments;
     final controller = Get.find<authcontroller>();
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 21, 22, 31),
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 21, 22, 31),
+          elevation: 0,
+          backgroundColor: Colors.white,
           leading: IconButton(
-              onPressed: () => Get.back(), icon: Icon(Icons.arrow_back)),
+              onPressed: () => Get.back(), icon: Icon(Icons.arrow_back,color: Colors.black,)),
         ),
         body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: controller.getUserDocument(),
@@ -77,21 +78,21 @@ class _editdataState extends State<editdata> {
                         width: 300,
                         decoration: BoxDecoration(
                             border: Border.all(
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             borderRadius: BorderRadius.circular(20)),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
                             controller: tes,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                                labelStyle: TextStyle(color: Colors.white),
-                                focusColor: Colors.white,
-                                fillColor: Colors.white,
+                                labelStyle: TextStyle(color: Colors.black),
+                                focusColor: Colors.black,
+                                fillColor: Colors.black,
                                 border: InputBorder.none,
                                 hintText: 'What do you want to do ?...',
-                                hintStyle: TextStyle(color: Colors.white)),
+                                hintStyle: TextStyle(color: Colors.black)),
                           ),
                         ),
                       ),
@@ -102,7 +103,7 @@ class _editdataState extends State<editdata> {
                         height: 70,
                         width: 300,
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
+                            border: Border.all(color: Colors.black),
                             borderRadius: BorderRadius.circular(10)),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -113,7 +114,7 @@ class _editdataState extends State<editdata> {
                                 children: [
                                   Icon(
                                     Icons.calendar_month_outlined,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     size: 40,
                                   ),
                                   SizedBox(
@@ -121,7 +122,7 @@ class _editdataState extends State<editdata> {
                                   ),
                                   Text(
                                     "Batas Waktu",
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: Colors.black),
                                   )
                                 ],
                               ),
@@ -141,7 +142,7 @@ class _editdataState extends State<editdata> {
                                     decoration: InputDecoration(
                                       labelText: 'Pilih Tanggal',
                                       labelStyle:
-                                          TextStyle(color: Colors.white),
+                                          TextStyle(color: Colors.black),
                                       suffixIcon: GestureDetector(
                                         onTap: () => selectDateTime(context),
                                         child: Icon(
@@ -167,7 +168,7 @@ class _editdataState extends State<editdata> {
                             isExpanded: true,
                             hint: const Text(
                               'Pilih Status',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
                             ),
                             value: items.contains(selectedOption.value)
                                 ? selectedOption.value
@@ -197,7 +198,7 @@ class _editdataState extends State<editdata> {
                             isExpanded: true,
                             hint: const Text(
                               'Pilih Prioritas',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
                             ),
                             value: item.contains(selectedOption1.value)
                                 ? selectedOption1.value
@@ -265,7 +266,7 @@ print("tesssssssssss $updatedData");
                             child: Center(
                               child: Text(
                                 "Batal",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
                           )

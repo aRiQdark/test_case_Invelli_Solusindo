@@ -57,14 +57,17 @@ class _berandaState extends State<beranda> {
           selectedDateTime = combinedDateTime;
 
           auth.filterbydate(selectedDateTime!);
-        } else {}
+        } else {
+
+          
+        }
       }
     }
 
     Get.put(authcontroller());
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 21, 22, 31),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SizedBox(
@@ -74,7 +77,6 @@ class _berandaState extends State<beranda> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
-
                 return ListView(
                   children: [
                     Row(
@@ -83,7 +85,7 @@ class _berandaState extends State<beranda> {
                         Row(
                           children: [
                             CircleAvatar(
-                              backgroundColor: Colors.white,
+                              backgroundColor: Colors.black,
                             ),
                             SizedBox(
                               width: 10,
@@ -94,25 +96,19 @@ class _berandaState extends State<beranda> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Hello,Users",
+                                      "Hello, ${FirebaseAuth.instance.currentUser!.email}",
                                       style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16),
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Icon(
-                                      Icons.check_circle,
-                                      color: Colors.white,
-                                      size: 15,
-                                    )
-                                  ],
+                                    ],
                                 ),
                                 Text(
                                   "To do list",
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: Colors.black),
                                 )
                               ],
                             )
@@ -122,108 +118,38 @@ class _berandaState extends State<beranda> {
                             onPressed: () => auth.logout(),
                             icon: Icon(
                               Icons.logout_outlined,
-                              color: Colors.white,
+                              color: Colors.black,
                             ))
                       ],
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () => Get.to(beranda()),
-                          child: Container(
-                            margin: EdgeInsets.only(right: 10),
-                            height: 42,
-                            width: 80,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.white)),
-                            child: Center(
-                                child: Text(
-                              "Title",
-                              style: TextStyle(color: Colors.white),
-                            )),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => Get.to(prioritas()),
-                          child: Container(
-                            margin: EdgeInsets.only(right: 10),
-                            height: 42,
-                            width: 80,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.white)),
-                            child: Center(
-                                child: Text(
-                              "Prioritas",
-                              style: TextStyle(color: Colors.white),
-                            )),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => Get.to(deadline()),
-                          child: Container(
-                            margin: EdgeInsets.only(right: 10),
-                            height: 42,
-                            width: 80,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.white)),
-                            child: Center(
-                                child: Text(
-                              "Deadline",
-                              style: TextStyle(color: Colors.white),
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
+                   
+                  SizedBox(
                       height: 20,
                     ),
-                    // // InkWell(
-                    // //   onTap: () => _selectDate,
-                    // //   child: Container(
-                    // //     margin: EdgeInsets.only(right: 10),
-                    // //     height: 42,
-                    // //     width: 84,
-                    // //     decoration: BoxDecoration(
-                    // //         border: Border.all(color: Colors.white)),
-                    // //     child: Center(
-                    // //         child: Text(
-                    // //       "Tanggal Deadline",
-                    // //       style: TextStyle(color: Colors.white),
-                    // //     )),
-                    // //   ),
-                    // ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                   
                     Text(
-                      "- Title",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      "Kegiatan",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      "My Task",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                    SizedBox(
+                   Container(
+                    height: Get.height,
+                    width: Get.width,
+                    decoration: BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))),
+                    child:  SizedBox(
                       height: 20,
-                    ),
-                    SizedBox(
-                      height: Get.height,
                       child: ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: documents.length,
                         itemBuilder: (context, index) {
-                          var isloading = true.obs;
                           DocumentSnapshot document = documents[index];
                           Map<String, dynamic> data =
                               document.data() as Map<String, dynamic>;
@@ -237,117 +163,127 @@ class _berandaState extends State<beranda> {
                             String prioritas = data['prioritas'].toString();
                             bool isdon = data['isDon'];
                             String status = data['status'].toString();
-                            // DateTime date = data['date'];
-
                             String title = data['title'];
 
-                            return Obx(() => InkWell(
-                                onTap: () => Get.toNamed('/detail-data',
-                                    arguments: document),
-                                child: documents.isNotEmpty
-                                    ? isloading.value
-                                        ? Container(
-                                            margin: EdgeInsets.only(bottom: 20),
-                                            height: 65,
-                                            width: 308,
-                                            decoration: BoxDecoration(
-                                                color: Color.fromARGB(
-                                                    255, 255, 255, 255),
-                                                borderRadius:
-                                                    BorderRadius.circular(20)),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(12.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Checkbox(
-                                                        value: isdon,
-                                                        onChanged: (value) {
-                                                          setState(() {
-                                                            isdon = value!;
-                                                            auth.isdone(
-                                                                id, value);
-                                                          });
-                                                        },
-                                                      ),
-                                                      SizedBox(
-                                                        width: 2,
-                                                      ),
-                                                      Text("${title}")
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      IconButton(
-                                                          onPressed: () =>
-                                                              Get.to(editdata(),
-                                                                  arguments:
-                                                                      document),
-                                                          icon:
-                                                              Icon(Icons.edit)),
-                                                      IconButton(
-                                                          onPressed: () {
-                                                            Get.defaultDialog(
-                                                                middleText:
-                                                                    'Yakin ingin hapus',
-                                                                cancel: ElevatedButton(
-                                                                    onPressed:
-                                                                        () => Get
-                                                                            .back(),
-                                                                    child: Text(
-                                                                        "Kembali")),
-                                                                confirm:
-                                                                    ElevatedButton(
-                                                                        onPressed:
-                                                                            () {
-                                                                          auth.deleteNote(
-                                                                              id);
-                                                                          Get.back();
-                                                                        },
-                                                                        child: Text(
-                                                                            "Ya, hapus")));
-                                                          },
-                                                          icon: Icon(
-                                                              LineIcons.trash)),
-                                                    ],
-                                                  )
-                                                ],
+                            return InkWell(
+                              onTap: () => Get.toNamed('/detail-data',
+                                  arguments: document),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 16,right: 16),
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 40),
+                                  height: 85,
+                                  width: 108,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white, 
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(
+                                            0.2),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Checkbox(
+                                              value: isdon,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  isdon = value!;
+                                                  auth.isdone(id, value);
+                                                });
+                                              },
+                                            ),
+                                            SizedBox(width: 8),
+                                            Text(
+                                              "${title}",
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
                                               ),
-                                            ))
-                                        : Text(
-                                            "data",
-                                            style:
-                                                TextStyle(color: Colors.amber),
-                                          )
-                                    : Center(
-                                        child: Text(
-                                        "data",
-                                        style: TextStyle(color: Colors.amber),
-                                      ))));
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            IconButton(
+                                              onPressed: () => Get.to(editdata(),
+                                                  arguments: document),
+                                              icon: Icon(Icons.edit),
+                                              color:
+                                                  Colors.blue, // Edit icon color
+                                            ),
+                                            IconButton(
+                                              onPressed: () {
+                                                Get.defaultDialog(
+                                                  middleText: 'Yakin ingin hapus',
+                                                  cancel: ElevatedButton(
+                                                    onPressed: () => Get.back(),
+                                                    child: Text("Kembali"),
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all(Colors.grey),
+                                                    ),
+                                                  ),
+                                                  confirm: ElevatedButton(
+                                                    onPressed: () {
+                                                      auth.deleteNote(id);
+                                                      Get.back();
+                                                    },
+                                                    child: Text("Ya, hapus"),
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all(Colors.red),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              icon: Icon(LineIcons.trash),
+                                              color:
+                                                  Colors.red, // Trash icon color
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
                           } else {
                             return Center(
                               child: Container(
-                                  margin: EdgeInsets.only(bottom: 20),
-                                  height: 65,
-                                  width: 308,
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: Lottie.asset(
-                                      "assets/lottie/animation_ln07v442.json",
-                                      fit: BoxFit
-                                          .cover) // Ganti 'your_image_asset.png' dengan path gambar Anda
-                                  ),
+                                margin: EdgeInsets.only(bottom: 20),
+                                height: 65,
+                                width: 308,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Lottie.asset(
+                                  "assets/lottie/animation_ln07v442.json",
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             );
                           }
                         },
                       ),
-                    )
+                    ),
+                   )
                   ],
                 );
               } else if (snapshot.hasError) {
@@ -362,11 +298,11 @@ class _berandaState extends State<beranda> {
       floatingActionButton: InkWell(
         onTap: () => Get.toNamed('/add-data'),
         child: Container(
-          height: 100,
-          width: 100,
+          height: 200,
+          width: 200,
           child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Lottie.asset("assets/lottie/animation_ln07v442.json",
+              child: Lottie.asset("assets/lottie/animation_ln07p4yj.json",
                   fit: BoxFit.cover)),
         ),
       ),

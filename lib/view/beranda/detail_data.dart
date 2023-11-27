@@ -13,11 +13,12 @@ class daetaildata extends GetView<authcontroller> {
     final auth = Get.find<authcontroller>();
     final index = Get.arguments;
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 21, 22, 31),
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 21, 22, 31),
+          backgroundColor: Colors.white,
+          elevation: 0,
           leading: IconButton(
-              onPressed: () => Get.back(), icon: Icon(Icons.arrow_back)),
+              onPressed: () => Get.back(), icon: Icon(Icons.arrow_back,color: Colors.black,)),
         ),
         body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: controller.getUserDocument(),
@@ -49,21 +50,21 @@ class daetaildata extends GetView<authcontroller> {
                         width: 300,
                         decoration: BoxDecoration(
                             border: Border.all(
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             borderRadius: BorderRadius.circular(20)),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
                             controller: tes,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                                labelStyle: TextStyle(color: Colors.white),
-                                focusColor: Colors.white,
-                                fillColor: Colors.white,
+                                labelStyle: TextStyle(color: Colors.black),
+                                focusColor: Colors.black,
+                                fillColor: Colors.black,
                                 border: InputBorder.none,
                                 hintText: 'What do you want to do ?...',
-                                hintStyle: TextStyle(color: Colors.white)),
+                                hintStyle: TextStyle(color: Colors.black)),
                           ),
                         ),
                       ),
@@ -74,7 +75,7 @@ class daetaildata extends GetView<authcontroller> {
                         height: 70,
                         width: 300,
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
+                            border: Border.all(color: Colors.black),
                             borderRadius: BorderRadius.circular(10)),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -85,7 +86,7 @@ class daetaildata extends GetView<authcontroller> {
                                 children: [
                                   Icon(
                                     Icons.calendar_month_outlined,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     size: 40,
                                   ),
                                   SizedBox(
@@ -93,7 +94,7 @@ class daetaildata extends GetView<authcontroller> {
                                   ),
                                   Text(
                                     "Batas Waktu",
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: Colors.black),
                                   )
                                 ],
                               ),
@@ -101,7 +102,7 @@ class daetaildata extends GetView<authcontroller> {
                                 child: Text(
                                   "${date}",
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                               )
@@ -116,7 +117,7 @@ class daetaildata extends GetView<authcontroller> {
                         height: 70,
                         width: 300,
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
+                            border: Border.all(color: Colors.black),
                             borderRadius: BorderRadius.circular(10)),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -159,7 +160,7 @@ class daetaildata extends GetView<authcontroller> {
                         height: 70,
                         width: 300,
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
+                            border: Border.all(color: Colors.black),
                             borderRadius: BorderRadius.circular(10)),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -170,7 +171,7 @@ class daetaildata extends GetView<authcontroller> {
                                 children: [
                                   Icon(
                                     Icons.diamond_outlined,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     size: 40,
                                   ),
                                   SizedBox(
@@ -178,7 +179,7 @@ class daetaildata extends GetView<authcontroller> {
                                   ),
                                   Text(
                                     "${prioritas}",
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: Colors.black),
                                   )
                                 ],
                               ),

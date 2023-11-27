@@ -49,7 +49,7 @@ class PrimaryTextfield extends StatelessWidget {
             ),
             borderSide: BorderSide.none),
         filled: true,
-        fillColor: Color(0xff262A34),
+        fillColor: Colors.grey,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         labelText: labelText,
